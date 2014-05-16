@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+<meta name="viewport"
+	content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<link rel="stylesheet"
+	href="js/jquery.mobile-1.4.0/jquery.mobile-1.4.2.min.css"
+	media="all, handheld" />
+
+<!--  script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script-->
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript"
+	src="js/jquery.mobile-1.4.0/jquery.mobile-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/indexnfc.js"></script>
+
+<script type="text/javascript">
+
+        </script>
+
+
+<title>Hello World</title>
+</head>
+<body>
+
+
+	<!-- Page Start-->
+	<div data-role="page" id="main">
+		<!-- Page Header Start -->
+		<div data-role="header">
+			<h1>Page Title</h1>
+		</div>
+		<!-- Page Header End -->
+		<!-- Page Body Start -->
+		<div data-role="content">
+			<p>Page content goes here..</p>
+			<div class="app">
+				<h1>Apache Cordova</h1>
+				<div id="deviceready" class="blink">
+					<p class="event listening">Connecting to Device</p>
+					<p class="event received">Device is Ready</p>
+				</div>
+			</div>
+			
+			<div data-role="content">	
+			<p>Questa &egrave; l'homepage di filesystem</p>		
+			<p>
+				<a href="filesystem.html" data-role="button" data-inline="true">filesystem page</a>   
+			</p>
+		</div><!-- /content -->
+			
+			<div data-role="content">	
+			<p>
+				<a href="#" onclick="writeOnFileSystem(); return false;"  data-role="button" data-inline="true">write on file system</a>   
+			</p>
+		</div>
+		
+		<div data-role="content">	
+			<p>
+				<a href="#" onclick="readOnDataData(); return false;"  data-role="button" data-inline="true">read on data.data</a>   
+			</p>
+		</div>
+		<!-- /content -->
+			
+			<a data-role="button" href="#index">Page Navigation</a> <a
+				data-role="button" href="#dialog1" data-rel="dialog"
+				data-transition="pop">Open Dialog </a> <label>Ajax Input</label> <input
+				id="ajax_input" type="text" value="Ciao" /> <input id="ajax_button"
+				type="submit" value="Invia Richiesta" />
+
+		</div>
+
+		<p>
+			<a href="#" onclick="showAlert(); return false;">Show Alert</a>
+		</p>
+		
+		
+		<form id="frmUpload" method="post" enctype="multipart/form-data"
+			action="/myPage.html">
+
+			<input type="hidden" id="hdnEntityId" name="entityId" value="12345" />
+
+			<input id="fileInput"
+				style="position: absolute; top: -1000px; left: 1000px;" type="file" /><br />
+
+			<label id="lblFilename">-</label><br /> <label for="fileInput">Browse</label><br />
+
+			<input id="btnUpload" type="button" value="Upload" />
+
+		</form>
+
+
+	</div>
+	<!-- Second Page-->
+	<div data-role="page" id="page2" data-add-back-btn=”true”>
+		<div data-role="header">
+			<h1>Second Page</h1>
+		</div>
+		<div data-role="content">
+			<h1>Second Page</h1>
+		</div>
+		<div data-role="footer">
+			<h4>Click back to go back to main page</h4>
+		</div>
+
+
+
+		<!-- Page Body End -->
+		<!-- Page Footer Start -->
+		<div data-role="footer">
+			<h4>Page Footer</h4>
+		</div>
+		<!-- Page Footer End -->
+	</div>
+
+	<div data-role="page" id="index">
+		<div data-role="content">
+			<ul id="your-tweets"></ul>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript">
+jQuery(document).ready(function($){
+    $('input#ajax_button').on('click',function(){
+ 
+        var inputValue = $('input#ajax_input').val(); //prendiamo il valore della nostro campo input
+ 
+        //ecco la nostra richiesta ad un file al quale inviamo in POST il parametro value contenente il valore del nostro campo input
+        var richiesta = $.ajax({
+                            url: "http://ip.jsontest.com/",
+                            type: "POST",
+                            data: {value : inputValue},
+                            dataType: "text"
+                          });
+ 
+        // Questa è la funzione che restituisce la risposta del nostro script se la nostra richiesta Ajax avrà esito positivo
+        richiesta.done(function(data) {
+            alert(data);
+        });
+        // Questa funzione invece (che sostituisce .error delle precedenti versioni di jQuery) restituisce, in caso di richiesta errata, il messaggio di errore riscontrato durante la richiesta ajax
+        richiesta.fail(function(jqXHR, textStatus) {
+            alert( "Request failed: " + textStatus );
+        });
+    });
+});
+</script>
+
+</body>
+</html>
